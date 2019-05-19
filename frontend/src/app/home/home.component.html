@@ -1,0 +1,87 @@
+<h1>{{ title }}</h1>
+
+<div id="container">
+  <div id="flex">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Wagon locations</span>
+        <mat-icon class="example-icon">train</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- this creates a google map on the page with the given lat/lng from -->
+    <!-- the component as the initial center of the map: -->
+    <agm-map [scrollwheel]="false" [zoom]="15" [latitude]="lat" [longitude]="lng" (mapClick)="placeMarker($event)" [mapTypeId]="'hybrid'">
+      <agm-marker *ngFor="let marker of markers" (markerClick)="tableRowClicked(marker.id)" [zIndex]="marker.zIndex" [iconUrl]="marker.edit || marker.clicked ? 'assets/selectedMarker.png' : ''" [latitude]="marker.latitude" [longitude]="marker.longitude">
+        <agm-info-window>{{marker.id}}</agm-info-window>
+      </agm-marker>
+    </agm-map>
+
+    <div id="form" [ngStyle]="{display: (editMode) ? 'block' : 'none'}">
+      <form [formGroup]="markerForm">
+          <mat-form-field>
+            <input [errorStateMatcher]="matcher" matInput #wagonNumber formControlName="wagonNumberValidator" [(ngModel)]="wagonNumberValue" placeholder="Wagon number">
+            <mat-hint align="end">Length: {{wagonNumber.value.length}}</mat-hint>
+            <mat-error *ngIf="markerForm.controls['wagonNumberValidator'].hasError('max')">
+              Number is too long.
+            </mat-error>
+            <mat-error *ngIf="markerForm.controls['wagonNumberValidator'].hasError('pattern')">
+              Only numeric values allowed.
+            </mat-error>
+          </mat-form-field>
+          <div class="buttons">
+            <button id="deleteMarker" mat-stroked-button color="accent" (click)="deleteClicked()">Verwijderen</button>
+            <button id="addMarker" type="submit" [disabled]="!markerForm.valid" mat-stroked-button color="accent" (click)="addClicked()">Toevoegen</button>
+          </div>
+      </form>
+    </div>
+
+
+    <div id="content">
+      <mat-divider></mat-divider>
+      <div id="filter-input">
+        <mat-form-field>
+          <input matInput id="filterTable" (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Wagonnumber </th>
+          <td mat-cell *matCellDef="let element" (click)="tableRowClicked(element.wagon_id)">{{element.wagon_id}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef> Time </th>
+          <td mat-cell *matCellDef="let element" (click)="tableRowClicked(element.wagon_id)">{{element.last_timestamp == null ? 'n/a' : element.last_timestamp}}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="lat">
+          <th mat-header-cell *matHeaderCellDef> Latitude </th>
+          <td mat-cell *matCellDef="let element" (click)="tableRowClicked(element.wagon_id)">{{element.latitude == null ? 'n/a' : element.latitude}}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="lang">
+          <th mat-header-cell *matHeaderCellDef> Longitude </th>
+          <td mat-cell *matCellDef="let element" (click)="tableRowClicked(element.wagon_id)">{{element.longitude == null ? 'n/a' : element.longitude}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon color="warn" (click)="deleteMarkerClicked(element.wagon_id)">delete</mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

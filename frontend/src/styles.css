@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import url('https://fonts.googleapis.com/css?family=Merriweather|PT+Sans');
+
+body, html {
+  background: #003366;
+  margin: 0;
+  padding: 0;
+  display: table;
+  width: 100%;
+  font-family: 'Merriweather', sans-serif;
+}
+
+input, .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #003366;
+  font-weight: bold;
+}
+
+h1 {
+  text-align: center;
+  color: hsla(210, 100%, 75%, 1.0);
+}
+
+
+
+/* Hide HTML5 Up and Down arrows. */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}

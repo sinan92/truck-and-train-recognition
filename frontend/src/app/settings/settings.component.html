@@ -1,0 +1,49 @@
+<h1>{{ title }}</h1>
+<div id="container">
+  <div class="box">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Cameras</span>
+        <mat-icon class="example-icon">camera</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-list>
+      <div *ngFor="let camera of cameras">
+        <mat-list-item>
+          <div class="text">
+            <div class="camera-item" *ngIf="camera.editable">
+              <mat-form-field>
+                <input matInput [(ngModel)]="camera.description" />
+              </mat-form-field>
+              <button (click)="save(camera.camera_id, camera.description)" mat-raised-button color="accent">Save</button>
+            </div>
+            <div class="camera-item" *ngIf="!camera.editable">
+              <p>{{camera.description}}</p>
+              <mat-icon class="edit-icon" (click)="enableEdit(camera.camera_id)">edit</mat-icon>
+            </div>
+          </div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </div>
+    </mat-list>
+  </div>
+
+  <div class="box">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Add wagon</span>
+        <mat-icon class="example-icon">train</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-list>
+      <mat-list-item id="add-wagon">
+        <mat-form-field>
+          <input type="number" [(ngModel)]="wagon_id" matInput placeholder="Wagon id" />
+        </mat-form-field>
+        <button (click)="addWagon()" mat-raised-button color="accent">Add</button>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

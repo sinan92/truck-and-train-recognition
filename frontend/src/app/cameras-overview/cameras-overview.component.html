@@ -1,0 +1,52 @@
+<h1>{{ title }}</h1>
+<div id="container">
+  <div id="flex">
+    <div id="cameras-container">
+      <div class="camera-box" *ngFor="let camera of cameras">
+        <mat-toolbar color="primary">
+          <mat-toolbar-row>
+            <span>{{camera.description}}</span>
+            <mat-icon class="example-icon">camera</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-list>
+          <div *ngFor="let wagon of camera.wagons">
+            <mat-list-item>{{wagon.wagon_id}}</mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+      </div>
+    </div>
+
+    <div id="history-container">
+      <div class="history-box">
+        <mat-toolbar color="primary">
+          <mat-toolbar-row>
+            <span>Wagons history</span>
+            <mat-icon class="example-icon">insert_chart</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-list>
+          <mat-divider></mat-divider>
+          <mat-list-item class="history-headers">
+            <div class="history-flex">
+              <div class="history-item">Description</div>
+              <div class="history-item">Timestamp</div>
+              <div class="history-item">Wagon</div>
+            </div>
+          </mat-list-item>
+          <div *ngFor="let history of histories.slice().reverse()">
+            <mat-list-item>
+              <div class="history-flex">
+                <div class="history-item">{{history.description}}</div>
+                <div class="history-item">{{history.timestamp}}</div>
+                <div class="history-item">{{history.wagon_id}}</div>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </mat-list>
+      </div>
+    </div>
+  </div>
+</div>

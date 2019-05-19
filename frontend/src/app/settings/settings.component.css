@@ -1,0 +1,80 @@
+.mat-toolbar.mat-primary{
+  background: #0074D9;
+  color: white;
+}
+
+.mat-toolbar .mat-toolbar-row{
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  font-weight: bold;
+}
+
+#container{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.box{
+  background: #0074D9;
+  margin: 10px;
+  padding-bottom: 10px;
+  width: 45%;
+}
+
+mat-toolbar mat-toolbar-row mat-icon{
+  margin-right: 5px;
+}
+
+.text{
+  float: left;
+}
+
+mat-list{
+  padding-top: 0;
+}
+
+.mat-list-base mat-list-item{
+  background-color: #d3d3d3;
+  color: #003366;
+  font-weight: bold;
+}
+
+mat-list-item button{
+  margin-left: 10px;
+  color: #003366;
+}
+
+.actions{
+  display: inline-block;
+  position: absolute;
+  right: 15px;
+  float: right;
+  cursor: pointer;
+}
+
+#add-wagon{
+  padding: 10px 0;
+}
+
+.edit-icon{
+  cursor: pointer;
+}
+
+.camera-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-list-item .text{
+  width: 100%;
+}
+
+.mat-form-field-underline {
+  background-color: #f44336 !important;;
+}
+.mat-form-field-ripple {
+  background-color: #f44336 !important;;
+}
