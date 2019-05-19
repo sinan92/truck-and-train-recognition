@@ -1,0 +1,9 @@
+SERVER_ADDRESS = 'localhost'
+PORT = '5555'
+
+RESOLUTION_H = 768
+RESOLUTION_W = 1024
+
+BLACK_SCREEN_URL = 'images/black.jpg'
+
+CAM_URL = 0

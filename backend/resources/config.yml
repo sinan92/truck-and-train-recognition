@@ -1,0 +1,18 @@
+prod:
+  host: 127.0.0.1
+  port: [5002]
+  data-dir: 'data'
+  database: 'sqlite:///{DATA_DIR}/aperam.db'
+  database-setup: []
+dev:
+  host: 127.0.0.1
+  port: [5002]
+  data-dir: 'data'
+  database: 'sqlite:///{DATA_DIR}/dev.db'
+  database-setup: []
+test:
+  host: 127.0.0.1
+  port: [6000, 6001, 6002, 6003, 6004, 6005]
+  data-dir: 'data'
+  database: 'sqlite://'
+  database-setup: ['CREATE', 'SEED']
